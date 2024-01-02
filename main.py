@@ -59,19 +59,20 @@ def main():
     database = r"C:\sqlite\db\python-sqlite.db"
 
     sql_create_school_table = """CREATE TABLE IF NOT EXISTS school (
+                                        zip INTEGER PRIMARY KEY,
                                         name TEXT,
                                         type TEXT,
                                         location TEXT,
-                                        zip code, INTEGER
                                         );"""
 
     sql_create_companies_table = """CREATE TABLE IF NOT EXISTS companies (
+                                    zip INTEGER PRIMARY KEY,
+                                    school_zip INTEGER,
                                     name TEXT,
                                     type TEXT,
                                     resource TEXT,
                                     email TEXT,
                                     phone number TEXT,
-                                    zip code INTEGER,
                                 );"""
 
     def insert_to_table(c):
@@ -79,10 +80,6 @@ def main():
         c.execute("INSERT INTO sql_create_school_table('Twin Groves', 'middle school', 'Buffalo Grove', '60089')")
         c.execute("INSERT INTO sql_create_companies_table('Jazzmans', 'coffee restaurant', '?', '?', '?', '60069')")
         c.execute("INSERT INTO aql_create_companies_table('Culvers', 'fast food restaurant', '?', '?', '?', '?')")
-
-    def find_companies_near_school():
-        if "SELECT zip code FROM sql_create_school_table" == "SELECT zip code FROM sql_create_companies_table":
-            print("The school and company is near each other!")
 
     # create a database connection
     conn = create_connection(database)
@@ -94,10 +91,11 @@ def main():
 
         # create companies table
         create_table(conn, sql_create_companies_table)
+
     else:
         print("Error! cannot create the database connection.")
 
-        find_companies_near_school()
+        # find_companies_near_school()
 
 
 if __name__ == '__main__':
