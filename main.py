@@ -1,5 +1,3 @@
-from http.server import BaseHTTPRequestHandler, HTTPServer
-
 # class Server(BaseHTTPRequestHandler):
 # def do_GET(self):
 # self.send_response(200)
@@ -32,6 +30,8 @@ def create_connection(db_file):
     :param db_file: database file
     :return: Connection object or None
     """
+    # conn = sqlite3.connect(db_file)
+    # return conn
     conn = None
     try:
         conn = sqlite3.connect(db_file)
@@ -48,6 +48,8 @@ def create_table(conn, create_table_sql):
     :param create_table_sql: a CREATE TABLE statement
     :return:
     """
+    # c = conn.cursor()
+    # c.execute(create_table_sql)
     try:
         c = conn.cursor()
         c.execute(create_table_sql)
@@ -56,14 +58,16 @@ def create_table(conn, create_table_sql):
 
 
 def main():
-    database = r"C:\sqlite\db\python-sqlite.db"
+    database = r"C:\Users\User\PycharmProjects\Commune_server\users.db"
 
     sql_create_school_table = """CREATE TABLE IF NOT EXISTS school (
                                         zip INTEGER PRIMARY KEY,
                                         name TEXT,
                                         type TEXT,
-                                        location TEXT,
+                                        location TEXT
                                         );"""
+
+
 
     sql_create_companies_table = """CREATE TABLE IF NOT EXISTS companies (
                                     zip INTEGER PRIMARY KEY,
@@ -72,7 +76,7 @@ def main():
                                     type TEXT,
                                     resource TEXT,
                                     email TEXT,
-                                    phone number TEXT,
+                                    phone number TEXT
                                 );"""
 
     def insert_to_table(c):
